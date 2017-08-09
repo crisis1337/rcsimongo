@@ -1,0 +1,18 @@
+<div class="text-center">
+<h3>{{vmDetails.allPatients}}</h3>
+</div>
+<hr>
+<md-button ng-click="vmDetails.getPatients()">Get All Records</md-button>
+
+<md-content>
+  <md-list flex>
+    <md-subheader class="md-no-sticky">Records</md-subheader>
+    <md-list-item class="md-3-line" ng-repeat="item in vmDetails.allPatients" ng-click="null">
+      <div class="md-list-item-text" layout="column">
+        <h3>{{ item.patientname }}</h3>
+        <h4>{{ item.mrn }}</h4>
+        <p>{{ item.dob | limitTo:10 }}</p>
+      </div>
+    </md-list-item>
+  </md-list>
+</md-content>

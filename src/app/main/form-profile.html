@@ -1,0 +1,161 @@
+<div layout-align="space-between start" layout-gt-xs="row">
+  <md-input-container  class="md-block" flex-gt-xs>
+    <label>Patient Name</label>
+    <input ng-model="vmForm.data.patientname">
+  </md-input-container>
+
+  <md-input-container  class="md-block" flex-gt-xs>
+    <label>MRN</label>
+    <input ng-model="vmForm.data.mrn">
+  </md-input-container>
+
+  <md-input-container  class="md-block" flex-gt-xs>
+    <label>D.O.B</label>
+  <md-datepicker ng-model="vmForm.data.dob" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
+  </md-input-container>
+
+
+
+</div>
+<hr>
+
+
+
+<div layout-align="start end" layout="row">
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Consultant</label>
+    <input ng-model="vmForm.data.consultant">
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Name</label>
+    <input ng-model="vmForm.data.consultantname">
+  </md-input-container>
+</div>
+<div layout-align="start end" layout="row">
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Admitting Doctor</label>
+    <input ng-model="vmForm.data.admittingdoctor">
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Address</label>
+    <input ng-model="vmForm.data.admittingaddress">
+  </md-input-container>
+</div>
+<hr>
+
+<div layout-align="start end" layout-gt-sm="row">
+
+  <div layout-gt-sm="column">
+
+ <div layout-gt-sm="row">
+   <md-input-container class="md-block">
+  <label>MCRN</label>
+  <input  ng-model="vmForm.data.mcrn">
+</md-input-container>
+
+<md-input-container md-no-float class="md-block">
+  <label>Bleep</label>
+  <input ng-model="vmForm.data.bleep">
+</md-input-container>
+ </div>
+
+
+
+    <div layout-gt-sm="row">
+  <md-input-container  class="md-block" flex-gt-xs>
+    <label>Referral Date</label>
+    <md-datepicker ng-model="vmForm.data.referraldate" md-placeholder="Enter date"></md-datepicker>
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Referral Time</label>
+    <input ng-model="vmForm.data.referraltime">
+  </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+  <md-input-container  class="md-block" flex-gt-xs>
+    <label>Date seen</label>
+    <md-datepicker ng-model="vmForm.data.seendate" md-placeholder="Enter date"></md-datepicker>
+  </md-input-container>
+
+  <md-input-container class="md-block" flex-gt-sm>
+    <label>Time seen</label>
+    <input ng-model="vmForm.data.seentime">
+  </md-input-container>
+    </div>
+  </div>
+
+  <div layout-gt-sm="column">
+  <md-input-container md-no-float class="md-block">
+    <label>Reason for Referral</label>
+    <input ng-model="vmForm.data.referralreason">
+  </md-input-container>
+  </div>
+</div>
+
+
+
+
+<hr>
+
+
+  <div  data-ng-repeat="complaint in vmForm.data.presentingcomplaints track by $index" md-no-float class="md-block">
+    <md-autocomplete  flex
+                     md-selected-item="vmForm.data.presentingcomplaints[$index].content"
+                     md-search-text="complaint.name"
+                     md-items="item in vmForm.complaintsList | filter:complaint.name"
+                     md-item-text="vmForm.data.presentingcomplaints[$index].content.name"
+                     md-delay="300"
+                     md-floating-label="Presenting Complaint">
+      <div layout="row" class="item" layout-align="start center">
+        <span md-highlight-text="complaint.name">{{item.name}}</span>
+      </div>
+
+    </md-autocomplete>
+
+    <div layout="row" flex="5">
+      <md-button class="md-primary" ng-show="$last" ng-click="vmForm.addNewChoice()">Add field</md-button>
+      <md-button  ng-show="$last && vmForm.data.presentingcomplaints.length > 1" ng-click="vmForm.removeChoice()">Remove</md-button>
+    </div>
+  </div>
+
+
+
+<hr>
+
+
+
+<md-input-container class="md-block">
+  <label>History of Presenting Complaint(s)</label>
+  <textarea ng-model="vmForm.data.historyofpresenting" md-maxlength="500" rows="5" md-select-on-focus></textarea>
+</md-input-container>
+<hr>
+<md-input-container class="md-block">
+  <label>Relevant Risk(s)</label>
+  <textarea ng-model="vmForm.data.relevantrisks" md-maxlength="500" rows="5" md-select-on-focus></textarea>
+</md-input-container>
+
+<hr>
+
+
+<md-input-container  data-ng-repeat="background in vmForm.data.background " md-no-float class="md-block">
+  <label ng-show="$first">Background - Past Medical & Surgerical History</label>
+  <div layout="column" flex ><input type="text" ng-model="background.content" name="" ></div>
+  <div layout="row" flex="5">
+    <md-button class="md-primary" ng-show="$last" ng-click="vmForm.addNewBackground()">Add field</md-button>
+    <md-button  ng-show="$last && vmForm.data.background.length > 1" ng-click="vmForm.removeBackground()">Remove</md-button>
+  </div>
+</md-input-container>
+
+<hr>
+
+<div class="form-group row">
+<div class="col-xs-6 col-xs-offset-3">
+    <md-button ui-sref="home.form.pastmeds" class="btn btn-block btn-info">
+    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </md-button>
+</div>
+</div>
